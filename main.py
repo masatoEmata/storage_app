@@ -12,11 +12,11 @@ def upload_svg():
     elif request.method == 'POST':
         files = request.files.getlist('file')
         for f in files:
-            FONT_DIR_PATH = './data/svg/sample_font'
-            file_path = os.path.join(FONT_DIR_PATH, f.filename)
+            pwd = os.path.abspath(os.path.dirname(__file__))
+            dir = os.path.join(pwd, 'data/svg/sample_font')
+            file_path = os.path.join(dir, f.filename)
             save_svg(file_path, f.read().decode())
         return 'uploaded'
-            # svg_file = save_svg(f.filename, f.read().decode())
 
 @app.route('/')
 def root():
